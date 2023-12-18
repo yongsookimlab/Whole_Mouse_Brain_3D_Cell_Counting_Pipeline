@@ -1,0 +1,61 @@
+open("Z:/LSFM/2021/2021_08/20210804_SM_ToddB2_Crfr2Cre_488Bg_561RFP_642SynapsinGFP_4x_5umstep_AAVSynapsinLS_FLPMPA/counted_3d.nii");
+open("Z:/LSFM/2021/2021_08/20210804_SM_ToddB2_Crfr2Cre_488Bg_561RFP_642SynapsinGFP_4x_5umstep_AAVSynapsinLS_FLPMPA/elastix_working/rotated_chx.tif");
+open("Z:/LSFM/2021/2021_08/20210804_SM_ToddB2_Crfr2Cre_488Bg_561RFP_642SynapsinGFP_4x_5umstep_AAVSynapsinLS_FLPMPA/elastix_working/result.mhd");
+
+selectWindow("counted_3d.nii");
+run("16-bit");
+selectWindow("rotated_chx.tif");
+run("16-bit");
+selectWindow("result.raw");
+run("16-bit");
+run("Find Edges", "stack");
+selectWindow("rotated_chx.tif");
+run("Multiply...", "value=0.200 stack");
+run("Merge Channels...", "c1=rotated_chx.tif c2=counted_3d.nii c3=result.raw create");
+saveAs("Tiff", "E:/ToddB2.tif");
+selectWindow("ToddB2.tif");
+close();
+
+
+
+
+open("Z:/LSFM/2021/2021_08/20210804_SM_ToddC1_Crfr2Cre_488Bg_561RFP_642SynapsinGFP_4x_5umstep_AAVSynapsinLS_FLPAHA/counted_3d.nii");
+open("Z:/LSFM/2021/2021_08/20210804_SM_ToddC1_Crfr2Cre_488Bg_561RFP_642SynapsinGFP_4x_5umstep_AAVSynapsinLS_FLPAHA/elastix_working/rotated_chx.tif");
+open("Z:/LSFM/2021/2021_08/20210804_SM_ToddC1_Crfr2Cre_488Bg_561RFP_642SynapsinGFP_4x_5umstep_AAVSynapsinLS_FLPAHA/elastix_working/result.mhd");
+
+selectWindow("counted_3d.nii");
+run("16-bit");
+selectWindow("rotated_chx.tif");
+run("16-bit");
+selectWindow("result.raw");
+run("16-bit");
+run("Find Edges", "stack");
+selectWindow("rotated_chx.tif");
+run("Multiply...", "value=0.200 stack");
+run("Merge Channels...", "c1=rotated_chx.tif c2=counted_3d.nii c3=result.raw create");
+saveAs("Tiff", "E:/ToddC1.tif");
+selectWindow("ToddC1.tif");
+close();
+
+
+
+
+open("Z:/LSFM/2021/2021_08/20210804_SM_ToddB1_Crfr2Cre_488Bg_561RFP_642SynapsinGFP_4x_5umstep_AAVSynapsinLS_FLPMPA/counted_3d.nii");
+open("Z:/LSFM/2021/2021_08/20210804_SM_ToddB1_Crfr2Cre_488Bg_561RFP_642SynapsinGFP_4x_5umstep_AAVSynapsinLS_FLPMPA/elastix_working/rotated_chx.tif");
+open("Z:/LSFM/2021/2021_08/20210804_SM_ToddB1_Crfr2Cre_488Bg_561RFP_642SynapsinGFP_4x_5umstep_AAVSynapsinLS_FLPMPA/elastix_working/result.mhd");
+
+selectWindow("counted_3d.nii");
+run("16-bit");
+selectWindow("rotated_chx.tif");
+run("16-bit");
+selectWindow("result.raw");
+run("16-bit");
+run("Find Edges", "stack");
+selectWindow("rotated_chx.tif");
+run("Multiply...", "value=0.200 stack");
+run("Merge Channels...", "c1=rotated_chx.tif c2=counted_3d.nii c3=result.raw create");
+saveAs("Tiff", "E:/ToddB1.tif");
+selectWindow("ToddB1.tif");
+close();
+
+
