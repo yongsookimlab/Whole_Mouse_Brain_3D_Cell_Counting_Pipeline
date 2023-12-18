@@ -4,7 +4,7 @@
 
 ## Overview
 This code package is designed for comprehensive 3D cell counting using whole mouse brain images. The pipeline includes:
-1. Implementing a supervised machine learning-based approach (ilastik) for automated cell segmentation via pixel/object classification,
+1. Implementing a supervised machine learning-based approach (ilastik) for automated cell segmentation via pixel and/or object classification,
 2. Image registration of serial two-photon tomography (STPT) stitched data to an age-matched reference brain template,
 3. Registration of assigned and segmented voxels/"cells" to the reference space based on the common coordinate framework (CCF) system, and
 4. Transformation of anatomical annotations (from the reference brain atlas) to the sample image registered to the reference space.
@@ -26,22 +26,33 @@ Ideally, a high-performance computer with a 32- or 64-core processor to perform 
   - Tested using ImageJ (1.53t) with Java 1.8.0_172 (64-bit)
 - ilastik, for machine learning-based segmentation: [download](https://www.ilastik.org/documentation/basics/installation) or [ilastik github](https://github.com/ilastik/ilastik)
 - elastix: a toolbox for rigid and nonrigid registration of images: [download](https://elastix.lumc.nl/download.php) or [elastix github](https://github.com/SuperElastix/elastix)
-- transformix
+- transformix: 
 - Python: [download](https://www.python.org/downloads/)
   - Tested using Python versions 3.8.3 and 3.9.7
  
 ### Data and Tools
-- Full resolution stitched imaging data acquired via STPT (TissueCyte)
+- Full-resolution, stitched, STPT imaging data acquired with TissueCyte (TissueVision)
+  - Raw STPT images can be fed through our custom stitching code (available [here](https://github.com/yongsookimlab/TracibleTissueCyteStitching)) for file structure and metadata compatibility.
+  - Additionally, the Brain Image Library (BIL, RRID:SCR_017272) is a public [database](https://www.brainimagelibrary.org/index.html) of brain imaging data that has STPT datasets for download which can be used as input for the counting code.
+  -  For reference on how to use the TissueCyte (e.g. microscope set up, brain sample preparation, and image stitching), please see our open-source published [protocol](https://star-protocols.cell.com/protocols/2373).
+    
 - Mouse brain reference atlas consisting of averaged templates and anatomical labels
   - Early Postnatal Developmental Mouse Brain Atlas (epDevAtlas, RRID:SCR_024725) can be viewed and downloaded [here](https://kimlab.io/brain-map/epDevAtlas/).
   - Allen Mouse Brain Reference Atlas (Allen CCFv3, RRID:SCR_002978) can be viewed and downloaded [here](https://mouse.brain-map.org/static/atlas).
 
 ## How To Use
+
+**Available in this Github repository are the necessary MATLAB scripts designed for 3D cell counting in STPT-imaged whole mouse brains. However, to execute the main pipeline code ***RUN_THIS_FILE.m***, all downloaded scripts from this repository, installed software, and reference atlas files must be gathered in one parent directory. The code is written with a specific folder structure, which can be found by viewing/downloading the code package [here].**
+
+### Pixel Classification using ilastik for Cell Segmentation
+1. Open the ilastik software for machine learning-based pixel classification.
+2. 
+
+### Cell Counting
+1. Open **RUN_THIS_FILE.m** in MATLAB.
 > Note: This README provides a general overview of how to run the main MATLAB script **RUN_THIS_FILE.m** that calls on a collective of scripts in the **private** folder. It is crucial to refer to the comments (preceded by %) in the main script for detailed information on each section and parameter.
 
-1. Open **RUN_THIS_FILE.m** in MATLAB. 
-2. The ilastik software for machine learning-based cell counting. Ensure ilastik is installed and its location is correctly specified in the script.
-File Structure
+2. 
 Background subtraction: Images in images_in_ch_folder are processed to create a signal minus noise output in subtracted_ch_folder.
 Normalization: Normalization is applied to images in images_in_ch_folder and saved in normalized_images_folder.
 Registration: Registration is performed using images in registering_ch_folder to match the reference brain background.
