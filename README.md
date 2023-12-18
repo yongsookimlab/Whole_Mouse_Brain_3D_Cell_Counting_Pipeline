@@ -5,7 +5,7 @@
 ## Overview
 This code package is designed for comprehensive 3D cell counting using whole mouse brain images. The pipeline includes:
 1. Implementing a supervised machine learning-based approach (ilastik) for automated cell segmentation via pixel/object classification,
-2. Image registration of serial two-photon tomography (STPT) or light sheet fluorescence microscopy (LSFM) stitched data to an age-matched reference brain template,
+2. Image registration of serial two-photon tomography (STPT) stitched data to an age-matched reference brain template,
 3. Registration of assigned and segmented voxels/"cells" to the reference space based on the common coordinate framework (CCF) system, and
 4. Transformation of anatomical annotations (from the reference brain atlas) to the sample image registered to the reference space.
 
@@ -30,13 +30,14 @@ Ideally, a high-performance computer with a 32- or 64-core processor to perform 
 - Python: [download](https://www.python.org/downloads/)
   - Tested using Python versions 3.8.3 and 3.9.7
  
-### Tools
+### Data and Tools
+- Full resolution stitched imaging data acquired via STPT (TissueCyte)
 - Mouse brain reference atlas consisting of averaged templates and anatomical labels
   - Early Postnatal Developmental Mouse Brain Atlas (epDevAtlas, RRID:SCR_024725) can be viewed and downloaded [here](https://kimlab.io/brain-map/epDevAtlas/).
   - Allen Mouse Brain Reference Atlas (Allen CCFv3, RRID:SCR_002978) can be viewed and downloaded [here](https://mouse.brain-map.org/static/atlas).
 
 ## How To Use
-> Note: This README provides a general overview of how to run the ***main*** MATLAB script **RUN_THIS_FILE.m** that calls on multiple scripts in the **private** folder. It is crucial to refer to the comments (preceded by %) in the script for detailed information on each section and parameter.
+> Note: This README provides a general overview of how to run the main MATLAB script **RUN_THIS_FILE.m** that calls on a collective of scripts in the **private** folder. It is crucial to refer to the comments (preceded by %) in the main script for detailed information on each section and parameter.
 
 1. Open **RUN_THIS_FILE.m** in MATLAB. 
 2. The ilastik software for machine learning-based cell counting. Ensure ilastik is installed and its location is correctly specified in the script.
@@ -77,7 +78,7 @@ Adjust the normalization method based on the experiment type (LS or STPT).
 
 
 ## Limitations
-
+This code was developed for 3D cell quantification utilizing whole brain imaging with the TissueCyte (TissueVision) STPT system in mind, which has specific parameters that may not apply to other imaging modalities. It is possible to use this code with 3D whole brain images acquired via light sheet fluorescence microscopy, but this is currently under optimization by the Yongsoo Kim Lab.
 
 
 ## License
