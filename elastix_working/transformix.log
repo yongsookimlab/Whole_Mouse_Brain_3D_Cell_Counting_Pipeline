@@ -1,0 +1,24 @@
+
+transformix is started at Fri Mar 24 19:42:45 2023.
+
+which transformix:   D:\Lab_Members\Josephine\MATLAB_codes\20220126_YTW_counting_pro_v0_01_JL_BgSubAddOn/transformix
+transformix runs at: DESKTOP-6FAIBSQ
+  Windows  Professional (x64),  (Build 9200)
+  with 262035 MB memory, and 64 cores @ 3699 MHz.
+Running transformix with parameter file "D:\Lab_Members\Josephine\MATLAB_codes\20220126_YTW_counting_pro_v0_01_JL_BgSubAddOn/elastix_working\TransformParameters.1.txt".
+
+Reading the elastix parameters from file ...
+
+ERROR: when reading the parameter file:
+
+itk::ExceptionObject (0000006B4CB5F568)
+Location: "unknown" 
+File: D:\tk\elastix\exports\tagspublic\elastix_04_8\src\Common\ParameterFileParser\itkParameterFileParser.cxx
+Line: 149
+Description: itk::ERROR: ParameterFileParser(000001B225DFC570): ERROR: the file D:\Lab_Members\Josephine\MATLAB_codes\20220126_YTW_counting_pro_v0_01_JL_BgSubAddOn/elastix_working\TransformParameters.1.txt does not exist.
+
+
+ERROR: Something went wrong during initialization of the configuration object.
+ERROR:
+The configuration object has not been initialized.
+Errors occurred
