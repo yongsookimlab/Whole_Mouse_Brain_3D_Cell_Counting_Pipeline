@@ -116,9 +116,9 @@ In brief:
 
 
 ### ML Counting Quality Control
-> The purpose of this section is to utilize the scripts within the **quality_control** folder for manually checking the segmentation accuracy of the trained ilastik ML for signal-containing voxels/cells. It is helpful to use this tool during ML training and optimization.
+> The purpose of this section is to utilize the scripts within the **quality_control** folder for quickly checking the segmentation accuracy of the trained ilastik ML for signal-containing voxels/cells and the registration accuracy. It is helpful to use this tool during ML training and optimization.
 
-1. 
+1. Download 
 
 > Contact: For questions or assistance, please contact the lab's principal investigator, Yongsoo Kim (yuk17@psu.edu).
 
