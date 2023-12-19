@@ -46,7 +46,12 @@ Ideally, a high-performance computer with a 32- or 64-core processor to perform 
 
 ### Pixel Classification using ilastik for Cell Segmentation
 1. Open the ilastik software for machine learning-based pixel classification.
-2. 
+2. Select new project. Type: Pixel classification.
+- Example of label classifiers:
+  - Label 1: empty background
+  - Label 2: brain tissue background
+  - Label 3: signal of interest for segmentation
+  - Label 4: (optional) signal #2, extraneous fibers, etc
 
 ### Cell Counting
 1. Open **RUN_THIS_FILE.m** in MATLAB.
