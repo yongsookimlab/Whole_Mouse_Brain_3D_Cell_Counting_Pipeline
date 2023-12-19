@@ -70,7 +70,7 @@ In brief:
    - Save this .ilp file on a local computer where the counting code will be executed or on a shared network drive.
    - Remember file pathname for input into counting code.
 
-### Cell Counting
+### Cell Counting and Atlas Registration
 **Available in this Github repository are the necessary MATLAB scripts designed for 3D cell counting in STPT-imaged whole mouse brains. However, to execute the main pipeline code ***RUN_THIS_FILE.m***, all downloaded scripts from this repository, installed software, and reference atlas files must be gathered in one parent directory. The code is written with a specific folder structure, which can be found by viewing/downloading the entire code package including test sample data [here](https://pennstateoffice365-my.sharepoint.com/:f:/g/personal/yuk17_psu_edu/ElSwPmP7iJ5MgHRibS-t2UoBStedo5zEuEMjOwElt5RBxA?e=OiGXtY).**
 
 > Note: This README provides a general overview of how to run the main MATLAB script **RUN_THIS_FILE.m** that calls on a collective of scripts in the **private** folder. It is crucial to refer to the comments (preceded by % and %%%) in the main script for detailed information on each section and parameter.
