@@ -25,7 +25,9 @@ Ideally, a high-performance computer with a 32- or 64-core processor to perform 
 - Fiji (ImageJ2): [download](https://imagej.net/software/fiji/)
   - Tested using ImageJ (1.53t) with Java 1.8.0_172 (64-bit)
 - ilastik, for machine learning-based segmentation: [download](https://www.ilastik.org/documentation/basics/installation) or [ilastik github](https://github.com/ilastik/ilastik)
+  - Tested using ilastik version 1.4.0
 - elastix and transformix: [download](https://elastix.lumc.nl/download.php) or [elastix github](https://github.com/SuperElastix/elastix)
+-   Tested using elastix version 4.8
 - Python: [download](https://www.python.org/downloads/)
   - Tested using Python versions 3.8.3 and 3.9.7
  
