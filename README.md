@@ -42,6 +42,7 @@ Ideally, a high-performance computer with a 32- or 64-core processor to perform 
   - Early Postnatal Developmental Mouse Brain Atlas (epDevAtlas, RRID:SCR_024725) can be viewed [here](https://kimlab.io/brain-map/epDevAtlas/) and downloaded [here](https://pennstateoffice365-my.sharepoint.com/:f:/g/personal/yuk17_psu_edu/EkS4MIAfRgdKp93QHphJmfoBwOPt4fr2IFERVUMlcR3Rvg?e=tEUQVx).
   - Allen Mouse Brain Reference Atlas (Allen CCFv3, RRID:SCR_002978) can be viewed and downloaded [here](https://mouse.brain-map.org/static/atlas).
 
+
 ## How To Use
 
 ### Pixel Classification for Cell Segmentation using ilastik
@@ -72,6 +73,7 @@ In brief:
    - Save this .ilp file on a local computer where the counting code will be executed or on a shared network drive.
    - Remember file pathname for input into counting code.
 
+
 ### Cell Counting and Atlas Registration
 **Available in this Github repository are the necessary MATLAB scripts designed for 3D cell counting in STPT-imaged whole mouse brains. However, to execute the main pipeline code ***RUN_THIS_FILE.m***, all downloaded scripts from this repository, installed software, and reference atlas files must be gathered in one parent directory. The code is written with a specific folder structure, which can be found by viewing/downloading the entire code package including test sample data [here](https://pennstateoffice365-my.sharepoint.com/:f:/g/personal/yuk17_psu_edu/ElSwPmP7iJ5MgHRibS-t2UoBStedo5zEuEMjOwElt5RBxA?e=OiGXtY).**
 
@@ -91,23 +93,32 @@ In brief:
     - ***Each input setting is explained in greater detail within the commented code, so please refer to those comments for specific directions.***
 5. Set Functional Switches:
      - Adjust the switches (background_subtraction_switch, normalization_switch, counting_switch, etc.) based on your requirements.
-6. For running registration (registration_switch), there are two parameter files important for elastix execution:
-     - Rigid
-     - BSpline
+6. For running rigid and nonrigid registration (registration_switch), there are two important parameter files for elastix execution:
+     - Rigid (EulerTransform) transformation parameters -> 001_parameters_Rigid.txt
+     - Nonrigid (BSplineTransform) transformation parameters -> 002_parameters_BSpline.txt
+     - In the downloadable folder **elastix**, which should exist in the parent folder of this pipeline code, there are two file versions for each parameter. Each one is optimized for either adult or early postnatal mouse brains.
+        - Adult -> **parameter_adult** folder
+        - Early postnatal -> **parameter_earlypostnatal** folder
+        - Note: It is important to specify which one of these folders will be used in code itself. Additionally, the parameter text files can be edited to improve image registration quality. 
 7. Execute **RUN_THIS_FILE.m** when all information has been filled out and the code switches have been configured.
      - Expected code runtime for a single early postnatal brain can range from approximately 3 to 6 hours using a 64-core computer (if no other tasks are running in the background).
      - If running on a normal home desktop computer (average 8 cores), the runtime may last or exceed 24 to 48 hours.
 8. Output in sample directory:
     - Spreadsheet (counted_3d_cells.csv) with columns for brain regions (listed in hierarchical order based on CCFv3 ontology), cell counts, cell densities, and volumes per region for an individual brain sample.
-      -  This quantitative data output can be analyzed using multiple software options (e.g. Prism (GraphPad), Excel (Microsoft), etc).
-      -  All quantitative results in the related [manuscript](
+      -  This output file is ready for analysis. By implementing this code for multiple,  imaged brains, you can calculate and generated averaged datasets with appropriate statistical measures.
+      -  All quantitative results in the related [manuscript](https://www.biorxiv.org/content/10.1101/2023.11.24.568585v1.full) were analyzed using Prism (GraphPad) and Excel (Microsoft).
     - Registration output (elastix folder)
        - All processes and errors during registration are logged (elastix.log) and these files are generated automatically. 
     - Reverse registration output with mapped cells in 3D reference space (cell_counted_refspace.tif)
-      - Open this file in Fiji, change image type to 32-bit (Image > Type > 32-bit), and apply a Gaussian filter with 2.0 sigma (Process > Filters > Gaussian blur 3D) to better visualize the 3D counted cells in the entire TIF stack.
+      - Open this file in Fiji, change image type to 32-bit (Image > Type > 32-bit), and apply a Gaussian filter with 2.0 sigma (Process > Filters > Gaussian blur 3D) for better visualization of the 3D counted cells in the entire TIF stack.
       - Save this edited TIF stack with a new file name. It can now be utilized as input for our isocortical flatmap visualization code, found [here](https://github.com/yongsookimlab/CorticalFlatMap). 
     - **Examples of test data output can be found in the shared folder [here](https://pennstateoffice365-my.sharepoint.com/:f:/g/personal/yuk17_psu_edu/EkTTKApE7aFLs7xzEMAnKloBq24jZ_rrKDmVWUt4mql93A?e=4DCPtz)**
 
+
+### ML Counting Quality Control
+> The purpose of this section is to utilize the scripts within the **quality_control** folder for manually checking the segmentation accuracy of the trained ilastik ML for signal-containing voxels/cells. It is helpful to use this tool during ML training and optimization.
+
+1. 
 
 > Contact: For questions or assistance, please contact the lab's principal investigator, Yongsoo Kim (yuk17@psu.edu).
 
