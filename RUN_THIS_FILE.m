@@ -9,56 +9,59 @@
 clear
 close all
 
-%%% Essential Settings
+%% Essential Settings - editing required
 
-% Input file pathname of main directory with stitched STPT imaged data (TIFs); this will also be the data output location.
+%%% Input file pathname of main directory with stitched STPT imaged data (TIFs); this will also be the data output location.
 targeting_folder = 'Y:\Lab_members\Josephine\40c_transfer\CtxLayer_celltype_mapping_LydiaNg_Allen\L1_Slc32a1-Lamp5\663537_M_P10_Slc32a1-Lamp5-Ai65_BIL0539050842'; 
 
-% Folder name for the stitched image TIFs -> signal channel
-images_in_ch_folder = [targeting_folder, '/stitchedImage_ch1']; 
-
-% Folder name for the stitched image TIFs -> for registration
-registering_ch_folder = [targeting_folder, '/stitchedImage_ch2']; 
-
-% Folder name for stitched image TIFs if using background subtraction -> "noise" channel
-background_ch_folder = [targeting_folder, '/stitchedImage_ch2']; 
-
-% Output images from background subtraction function that may be used for ML counting -> DO NOT CHANGE FOLDER NAME
-subtracted_ch_folder = [targeting_folder, '/Signal_minus_Noise']; 
-
-% Input file pathname for ilastik ML project file (.ilp)
+%%% Input file pathname for ilastik ML project file (.ilp)
 project_name = ['D:\Lab_Members\Josephine\ilastik\20230321_Slc32a1_Lamp5_Ai65_JL_v1.ilp']; 
 
-% Set location of the installed ilastik application (.exe) -> This should be saved within the parent directory of code package. Check OneDrive for folder structure.
-ilastik_location = [pwd,'/ilastik/ilastik'];
-
-% Set the folder name for the ilastik ML output (TIFs). Output will be deposited in targeting folder.
-images_ML_folder = [targeting_folder, '/ml_result'];
-
-% Input file pathname for averaged mouse brain template from epDevAtlas or AllenCCFv3 (20um isotropic, unsigned 16 bit, TIF only) 
+%%% Input file pathname for averaged mouse brain template from epDevAtlas or AllenCCFv3 (20um isotropic, unsigned 16 bit, TIF only) 
 reference_brain_background = [pwd, '/reference_brain/STPT/T_P10_STPT_Symmetric20um_template0_masked_iso20um_u16.tif'];
 
-%% Orientation: Brain template must be in coronal view, going from posterior to anterior direction as Z-depth increases (e.g. Z001 -> Z625) 
-%% The file location and pathname must be consistent with the folder structure in OneDrive. It should be saved within the parent directory of the code package.
-
-% Input file pathname for Allen CCFv3 anatomical labels (.csv) in ontological order with RGB color coding, which should be saved in the same folder as the reference brain template. CSV can be downloaded from -> https://kimlab.io/brain-map/epDevAtlas/
-ref_csv_name = [pwd, '/reference_brain/16bit_allen_csv_20200916.csv'];
-
-% Input file pathname for the reference brain annotations (20um isotropic, unsigned 16 bit, TIF only).
+%%% Input file pathname for the reference brain annotations (20um isotropic, unsigned 16 bit, TIF only).
 allen_anno = strcat(pwd, '/reference_brain/STPT/P10_CCFv3_annotations_16b_v3_iso20um_u16.tif'); 
 % Ensure annotation file matches the xyz resolution (ie. 20um isotropic) and orientation of the reference template brain. 
 
-% Input the x, y, and z resolution (in micrometers) of the stitched image.
+
+%% Basic Settings - may need editing
+
+%%% Folder name for the stitched image TIFs -> signal channel
+images_in_ch_folder = [targeting_folder, '/stitchedImage_ch1']; 
+
+%%% Folder name for the stitched image TIFs -> for registration
+registering_ch_folder = [targeting_folder, '/stitchedImage_ch2']; 
+
+%%% Folder name for stitched image TIFs if using background subtraction -> "noise" channel
+background_ch_folder = [targeting_folder, '/stitchedImage_ch2']; 
+
+%%% Output images from background subtraction function that may be used for ML counting -> DO NOT CHANGE FOLDER NAME
+subtracted_ch_folder = [targeting_folder, '/Signal_minus_Noise']; 
+
+%%% Input file pathname for Allen CCFv3 anatomical labels (.csv) in ontological order with RGB color coding, which should be saved in the same folder as the reference brain template. CSV can be downloaded from -> https://kimlab.io/brain-map/epDevAtlas/
+ref_csv_name = [pwd, '/reference_brain/16bit_allen_csv_20200916.csv'];
+
+%%% Set location of the installed ilastik application (.exe) -> This should be saved within the parent directory of code package. Check OneDrive for folder structure.
+ilastik_location = [pwd,'/ilastik/ilastik'];
+
+%%% Set the folder name for the ilastik ML output (TIFs). Output will be deposited in targeting folder.
+images_ML_folder = [targeting_folder, '/ml_result'];
+
+%%% Orientation: Brain template must be in coronal view, going from posterior to anterior direction as Z-depth increases (e.g. Z001 -> Z625) 
+%%% The file location and pathname must be consistent with the folder structure in OneDrive. It should be saved within the parent directory of the code package.
+
+%%% Input the x, y, and z resolution (in micrometers) of the stitched image.
 xyz_resolution = [1.00 1.00 50]; % STPT [1.00 1.00 50]
 
-% Set the target resolution (in micrometers) for downsized TIFs. 
+%%% Set the target resolution (in micrometers) for downsized TIFs. 
 targeting_resolution = 20;
 
-% Confirm the imaged brain's xyz orientation. 
+%%% Confirm the imaged brain's xyz orientation. 
 brain_xyz_orientation = [3 2 5]; 
 % Usually, our STPT images have [x+, y+, z+] orientation of [3 2 5] -> Example: Coronal brain with its ventral side on the left and dorsal surface facing the right. As Z-depth increases, the brain goes from posterior to anterior.
 
-%%% Note about brain_xyz_orientation:
+%%% Notes about brain_xyz_orientation:
 %%% [x+, y+, z+] -> Each variable represents the "direction" of brain orientation 
 %%% x+: (image on screen) up->down, y+: (image on screen) left->right, z+: z00->z99
 %%% Values connote direction of brain orientation: 
@@ -67,23 +70,22 @@ brain_xyz_orientation = [3 2 5];
 %%% 5: anterior, 6: posterior
 
 
-
-%%% Optional Settings
+%% Optional Settings
 
 %%% Normalization of image intensity:
 %%% The code can use a TIF stack to compute the average pixel intensity of the imaged brain. Normalized (adjusted) images will be stored in the "normalized_images_folder" for later use. 
   
-% Input folder name for normalized image TIFs (only if using additional normalization function).
+%%% Input folder name for normalized image TIFs (only if using additional normalization function).
 normalized_images_folder = [targeting_folder, '/stitchedImage_chx_n'];
 
-% Set the signal amplification factor (if using additional normalization function).
+%%% Set the signal amplification factor (if using additional normalization function).
 normalizing_intensity_target = 1000; % This value is usually set to 1000.
 
 
 %%% Nucleus (or other solid spherical shape) counting using 3D fast Fourier transform (FFT) and water shedding:
 %%% The code can utilize simple high intensity peaks for nucleus counting and avoid over-counting in 2D and 3D.
 
-% Set the expected cell and nucleus size (in micrometers) and settings for 3D fast Fourier transform (FFT)-based nucleus counting.
+%%% Set the expected cell and nucleus size (in micrometers) and settings for 3D fast Fourier transform (FFT)-based nucleus counting.
 num_cpu = 16; % Setting for 3D FFT-based nucleus counting. Do not change.
 expected_nuc_size = 10; % Expected nucleus size.
 intensity_thresh = 0.6; % The intensity of the cell vs the background; 0.6 meaning 60% brighter -> Setting for 3D FFT-based counting
@@ -95,30 +97,24 @@ pixel_counted_nii_name = [targeting_folder, '/pixel_coverage.nii'];
 pixel_counted_csv_name = [targeting_folder, '/pixel_coverage.csv'];
 pixel_rev_registrated_folder = [targeting_folder, '/pix_rev_registration'];
 
-% Ignore below:
+%%% Ignore below:
 %shrinked_folder = [targeting_folder, '/stitched_00_shrink'];
 %shrinked_file = [targeting_folder, '/warping/20211215_JL_JL0287_M_P8_PV-Cre-Ai14C-8_ch1_p05.tif'];
 
 
 
-%%% Functional Code Switches for Cell Counting Pipeline
+%% Functional Switches for Cell Counting Pipeline - see notes below
 
 background_subtraction_switch = 0;
-
 normalization_switch = 0; % if applying ML counting to newly subtracted images, edit "normalization_switch" under "Pipeline" and make all "normalized_images_folder = subtracted_ch_folder"
-
 counting_switch = 3;
-
 registration_switch = 1;
-
 csv_switch = 1;
-
 reverse_registration_switch = 1;
-
 normalization_ratio = 2; % 2 for STPT. Do not change.
 
 
-%%% Pipeline Notes:
+%% Notes for Functional Switches:
 
 %%% background_subtraction_switch
 %%% 0: Do not perform background subtraction.
@@ -152,7 +148,7 @@ normalization_ratio = 2; % 2 for STPT. Do not change.
 
 
 
-%%% Pipeline Scripts:
+%% Pipeline:
 
 switch background_subtraction_switch
     case 0
