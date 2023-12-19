@@ -1,6 +1,6 @@
 # 3D Cell Quantification Pipeline for the Whole Mouse Brain 
 - Created by the [Yongsoo Kim Lab](https://kimlab.io/)
-- README updated on 20231218 by J. Liwang
+- README written and updated on 20231219 by J. Liwang
 
 ## Overview
 This code package is designed for comprehensive 3D cell counting using whole mouse brain images. The pipeline includes:
