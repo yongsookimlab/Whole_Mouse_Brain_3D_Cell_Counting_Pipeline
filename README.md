@@ -98,10 +98,13 @@ In brief:
      - Expected code runtime for a single early postnatal brain can range from approximately 3 to 6 hours using a 64-core computer (if no other tasks are running in the background).
      - If running on a normal home desktop computer (average 8 cores), the runtime may last or exceed 24 to 48 hours.
 8. Output in sample directory:
-    - Spreadsheet (counted_3d_cells.csv) with columns for brain regions, cell counts, cell densities, and volumes per region
+    - Spreadsheet (counted_3d_cells.csv) with columns for brain regions (listed in hierarchical order based on CCFv3 ontology), cell counts, cell densities, and volumes per region for an individual brain sample.
+      -  This quantitative data output can be further analyzed using multiple software options (e.g. Prism (GraphPad), Excel (Microsoft), etc.) 
     - Registration output (elastix folder)
+       - All processes and errors during registration are logged (elastix.log) and these files are generated automatically. 
     - Reverse registration output with mapped cells in 3D reference space (cell_counted_refspace.tif)
       - Open this file in Fiji, change image type to 32-bit (Image > Type > 32-bit), and apply a Gaussian filter with 2.0 sigma (Process > Filters > Gaussian blur 3D) to better visualize the 3D counted cells in the entire TIF stack.
+      - Save this edited TIF stack with a new file name. It can now be utilized as input for our isocortical flatmap visualization code, found [here](https://github.com/yongsookimlab/CorticalFlatMap). 
     - **Examples of test data output can be found in the shared folder [here](https://pennstateoffice365-my.sharepoint.com/:f:/g/personal/yuk17_psu_edu/EkTTKApE7aFLs7xzEMAnKloBq24jZ_rrKDmVWUt4mql93A?e=4DCPtz)**
 
 
