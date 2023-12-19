@@ -91,13 +91,17 @@ In brief:
     - ***Each input setting is explained in greater detail within the commented code, so please refer to those comments for specific directions.***
 5. Set Functional Switches:
      - Adjust the switches (background_subtraction_switch, normalization_switch, counting_switch, etc.) based on your requirements.
-6. Execute **RUN_THIS_FILE.m** when all information has been filled out and the code switches have been configured.
+6. For running registration (registration_switch), there are two parameter files important for elastix execution:
+     - Rigid
+     - BSpline
+7. Execute **RUN_THIS_FILE.m** when all information has been filled out and the code switches have been configured.
      - Expected code runtime for a single early postnatal brain can range from approximately 3 to 6 hours using a 64-core computer (if no other tasks are running in the background).
      - If running on a normal home desktop computer (average 8 cores), the runtime may last or exceed 24 to 48 hours.
-7. Output in sample directory:
-    - Spreadsheet (counted_3d.csv) with columns for brain regions, cell counts, cell densities, and volumes per region
+8. Output in sample directory:
+    - Spreadsheet (counted_3d_cells.csv) with columns for brain regions, cell counts, cell densities, and volumes per region
     - Registration output (elastix folder)
     - Reverse registration output with mapped cells in 3D reference space (cell_counted_refspace.tif)
+      - Open this file in Fiji, change image type to 32-bit (Image > Type > 32-bit), and apply a Gaussian filter with 2.0 sigma (Process > Filters > Gaussian blur 3D) to better visualize the 3D counted cells in the entire TIF stack.
     - **Examples of test data output can be found in the shared folder [here](https://pennstateoffice365-my.sharepoint.com/:f:/g/personal/yuk17_psu_edu/EkTTKApE7aFLs7xzEMAnKloBq24jZ_rrKDmVWUt4mql93A?e=4DCPtz)**
 
 
