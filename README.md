@@ -26,7 +26,6 @@ Ideally, a high-performance computer with a 32- or 64-core processor to perform 
   - Tested using ImageJ (1.53t) with Java 1.8.0_172 (64-bit)
 - ilastik, for machine learning-based segmentation: [download](https://www.ilastik.org/documentation/basics/installation) or [ilastik github](https://github.com/ilastik/ilastik)
 - elastix: a toolbox for rigid and nonrigid registration of images: [download](https://elastix.lumc.nl/download.php) or [elastix github](https://github.com/SuperElastix/elastix)
-- transformix: 
 - Python: [download](https://www.python.org/downloads/)
   - Tested using Python versions 3.8.3 and 3.9.7
  
@@ -76,46 +75,29 @@ In brief:
 > Note: This README provides a general overview of how to run the main MATLAB script **RUN_THIS_FILE.m** that calls on a collective of scripts in the **private** folder. It is crucial to refer to the comments (preceded by % and %%%) in the main script for detailed information on each section and parameter.
 
 1. Open **RUN_THIS_FILE.m** in MATLAB.
-2. Ensure all necessary files and applications are located in one parent directory for the code package. This folder should be saved on your local computer drive.
+2. Ensure that all necessary files, folders, and applications are located in one parent directory for the code package. This folder should be saved on your local computer drive.
 3. Outline of steps:
     - Background subtraction (optional): Images in "background_ch_folder" are subtracted from "images_in_ch_folder" to create a "Signal_minus_Noise" image output in "subtracted_ch_folder".
     - Normalization (optional): Normalization of intensity is applied to images in "images_in_ch_folder" and saved in "normalized_images_folder".
     - Registration: Registration is performed using images in "registering_ch_folder" to align with the "reference_brain_background".
     - Cell counting: Various counting methods are applied based on the "counting_switch" value.
-    - Reverse registration: Back registration of anatomical labels "allen_anno"
+    - Reverse registration: Back registration of anatomical labels "allen_anno" to the imaged brain in reference space.
 4. Under **Essential Settings**, fill out the necessary input for executing the counting code.
     - Update the "targeting_folder" variable with the main cluster folder path containing stitched STPT images.
     - Set the paths for "images_in_ch_folder", "registering_ch_folder", "background_ch_folder", and "subtracted_ch_folder".
     - ***Each input setting is explained in greater detail within the commented code, so please refer to those comments for specific directions.***
-5. 
-Instructions
-Basic Settings:
+5. Set Functional Switches:
+     - Adjust the switches (background_subtraction_switch, normalization_switch, counting_switch, etc.) based on your requirements.
+6. Execute **RUN_THIS_FILE.m** when all information has been filled out and the code switches have been configured.
+     - Code runtime for single early postnatal brain can range from 3-6 hours using a 64-core computer (if no other tasks are running in the background). If running on a home desktop with average of 8 cores, multiply the time duration by 8 for an estimate of runtime.
+7. Output:
+    - Spreadsheet (.csv file) of cell counts, cell densities, and brain regional volumes
+    - Registration outputs
+    - Reverse registration output with mapped cells in reference space
+    - **Examples of data output can be found in the OneDrive**
 
-
-Functional Switches:
-
-Adjust the switches (background_subtraction_switch, normalization_switch, counting_switch, etc.) based on your requirements.
-Pro Settings:
-
-Set paths for normalized_images_folder, images_ML_folder, and other pro-level settings.
-Machine Learning Notes:
-
-Ensure ilastik is properly installed and the project is set up for pixel classification.
-Pipeline:
-
-Run the script, and the pipeline will execute based on the configured switches.
-Output:
-
-The final results, including cell counts and registration outputs, will be available in the specified folders.
-Notes:
-For more information about switch options, refer to the comments in the script.
-Ensure that all required folders exist before running the script.
-Adjust the normalization method based on the experiment type (LS or STPT).
 
 > Contact: For questions or assistance, please contact the lab's principal investigator, Yongsoo Kim (yuk17@psu.edu).
-
-
-
 
 
 ## Limitations
