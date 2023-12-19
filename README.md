@@ -44,18 +44,36 @@ Ideally, a high-performance computer with a 32- or 64-core processor to perform 
 
 **Available in this Github repository are the necessary MATLAB scripts designed for 3D cell counting in STPT-imaged whole mouse brains. However, to execute the main pipeline code ***RUN_THIS_FILE.m***, all downloaded scripts from this repository, installed software, and reference atlas files must be gathered in one parent directory. The code is written with a specific folder structure, which can be found by viewing/downloading the code package [here].**
 
-### Pixel Classification using ilastik for Cell Segmentation
+### Pixel Classification for Cell Segmentation using ilastik
+> The Pixel Classification workflow categorizes pixels by utilizing both pixel features and user annotations. This workflow provides flexibility in choosing from a range of generic pixel features, including smoothed pixel intensity, edge filters, and texture descriptors. After selecting the desired features, a Random Forest classifier is trained interactively using user annotations.
+
+- See ilastik's [tutorial](https://www.ilastik.org/documentation/pixelclassification/pixelclassification) on pixel classification for cell segmentation and all related documentation.
+
+In brief:
 1. Open the ilastik software for machine learning-based pixel classification.
-2. Select new project. Type: Pixel classification.
-- Example of label classifiers:
-  - Label 1: empty background
-  - Label 2: brain tissue background
-  - Label 3: signal of interest for segmentation
-  - Label 4: (optional) signal #2, extraneous fibers, etc
+2. Select new project. Project type: Pixel classification.
+3. Input data for ML training.
+    - Select and upload stitched STPT data pertaining to specific cell type (and/or age).
+    - The number of single TIFs uploaded can vary, but it is good to have at least 5 images representing different brain regions in anterior-posterior axis.
+4. Select features.
+    - It is recommended to start off with a wider range (10 sigma) of features.
+5. Train your classifier.
+   - Under the "Group Visibility" section, right-click on **Input Data** to adjust the brightness threshold.
+      - Threshold value should remain consistent during across all images during training.
+    - Examples of labels (minimum of three for counting code, with Label 3 segmenting your cells of interest):
+      - Label 1: empty background
+      - Label 2: brain tissue background
+      - Label 3: signal of interest for segmentation
+      - Label 4: (optional) signal #2, extraneous fibers, etc
+7. Click on the **Live Update** button to let the ML training of drawn labels update on the imaged TIFs.
+     - Note: Unclick **Live Update** when navigating around image and drawing additional labels because the program can lag.
+8. Toggle between **Prediction** and **Segmentation** buttons to view how the trained ML is performing based on user input thus far.
 
 ### Cell Counting
+> Note: This README provides a general overview of how to run the main MATLAB script **RUN_THIS_FILE.m** that calls on a collective of scripts in the **private** folder. It is crucial to refer to the comments (preceded by % and %%%) in the main script for detailed information on each section and parameter.
+
 1. Open **RUN_THIS_FILE.m** in MATLAB.
-> Note: This README provides a general overview of how to run the main MATLAB script **RUN_THIS_FILE.m** that calls on a collective of scripts in the **private** folder. It is crucial to refer to the comments (preceded by %) in the main script for detailed information on each section and parameter.
+
 
 2. 
 Background subtraction: Images in images_in_ch_folder are processed to create a signal minus noise output in subtracted_ch_folder.
