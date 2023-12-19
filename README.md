@@ -9,8 +9,8 @@ This code package is designed for comprehensive 3D cell counting using whole mou
 3. Registration of assigned and segmented voxels/"cells" to the reference space based on the common coordinate framework (CCF) system, and
 4. Transformation of anatomical annotations (from the reference brain atlas) to the sample image registered to the reference space.
 
-- Previously implemented for cell type mapping in the early postnatally developing mouse brain: [download](https://www.biorxiv.org/content/10.1101/2023.11.24.568585v1.full.pdf) / [doi](https://www.biorxiv.org/content/10.1101/2023.11.24.568585v1) 
-  - Examples of generated data output (brain region volumes, cell densities, cell counts) from running this code package and its application can be viewed and downloaded [here](https://kimlab.io/brain-map/epDevAtlas/).
+- Previously implemented for cell type mapping in the early postnatally developing mouse brain: [download preprint](https://www.biorxiv.org/content/10.1101/2023.11.24.568585v1.full.pdf) / [doi](https://www.biorxiv.org/content/10.1101/2023.11.24.568585v1) 
+  - Here is a Neuroglancer-based [web visualizer](https://kimlab.io/brain-map/epDevAtlas/) for the generated data output from running this code package, allowing any user to freely explore the data.
 
 ## System Requirements
 > Please make sure the following requirements (ie. operating system, software, and tools) are downloaded and installed on your machine prior to code use.
