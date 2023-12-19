@@ -115,11 +115,28 @@ In brief:
     - **Examples of test data output can be found in the shared folder [here](https://pennstateoffice365-my.sharepoint.com/:f:/g/personal/yuk17_psu_edu/EkTTKApE7aFLs7xzEMAnKloBq24jZ_rrKDmVWUt4mql93A?e=4DCPtz)**
 
 
-### ML Counting Quality Control
-> The purpose of this section is to utilize the scripts within the **quality_control** folder for quickly checking the segmentation accuracy of the trained ilastik ML for signal-containing voxels/cells and the registration accuracy. It is helpful to use this tool during ML training and optimization.
+### Quality Check for ML Cell Counting and Image Registration
+> The purpose of this section is to utilize the scripts within the **quality_control** folder for quickly checking the segmentation accuracy of the trained ilastik ML for signal-containing voxels/cells and the image registration accuracy. It is helpful to use this tool during ML training and optimization. 
 
-1. Download 
+1. Download **quality_control** folder and ensure all components are inside:
+     - **Run_QC1_QC2.m**
+     - **quality_check_counting_setting_pack.m**
+     - **quality_check_background.m**
+     - **quality_check_counting.m**
+2. Open the script **quality_check_counting_setting_pack.m** in MATLAB and copy settings from **RUN_THIS_FILE.m**. Additionally:
+     - Set the stack_thickness = 0 to avoid z-overlapping.
+     - Set "radii_draw" to a value (in micrometers) for the program to draw a circle around for the counted cells.
+     - The "drawing_range" set to 3000 for the maximum contrast has previously worked for this purpose, but this number can be changed if desired.
+3. Open **quality_check_counting.m** in MATLAB for counting quality check (QC1).
+     - See commented code for details on input settings.
+     - When run, this code will check the full resolution stitched images at the specified z-intervals and draw red circles around each counted cell based on the ilastik ML results. With this QC, it is easy to check whether the trained ML needs improvement. You can also use this to calculate an F-scpre.
+4. Open **quality_check_background.m** in MATLAB for registration quality check (QC2).
+     - See commented code for details on input settings.
+     - When run, this code will use a rotated, downsized image TIF stack of the brain and elastix registration results to align the counted 3D voxels to the chosen 3D reference space. The result is a RGB image (NII and/or PNG file) with the aligned 3D counts in reference space. The warmer colors denote higher counts/density. With this QC, you can quickly check registration quality for specified z-intervals without performing elastix on the full dataset.
+5. Save when finished with the settings for all three scripts.
+6. Open **Run_QC1_QC2.m** and execute this MATLAB script to perform quality checks for both counting and registration.
 
+   
 > Contact: For questions or assistance, please contact the lab's principal investigator, Yongsoo Kim (yuk17@psu.edu).
 
 
