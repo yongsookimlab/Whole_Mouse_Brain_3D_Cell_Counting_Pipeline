@@ -1,5 +1,5 @@
 # 3D Cell Quantification Pipeline for the Whole Mouse Brain 
-- Created by the [Yongsoo Kim Lab](https://kimlab.io/) in 2021
+- Created by the [Yongsoo Kim Lab](https://kimlab.io/)
 - README updated on 20231218 by J. Liwang
 
 ## Overview
@@ -110,4 +110,4 @@ This code was developed for 3D cell quantification utilizing whole brain imaging
 - The epDevAtlas and associated code is licensed under a Creative Commons Attribution 4.0 International License as of December 1, 2023, but it is free and openly accessible for academic use.
 - If you use this code anywhere, we would appreciate if you cite the following [preprint](https://www.biorxiv.org/content/10.1101/2023.11.24.568585v1):
   - **epDevAtlas: Mapping GABAergic cells and microglia in postnatal mouse brains**
-    - Josephine K. Liwang, Fae A. Kronman, Jennifer A. Minteer, Yuan-Ting Wu, Daniel J. Vanselow, Yoav Ben-Simon, Michael Taormina, Deniz Parmaksiz, Sharon W. Way, Hongkui Zeng, Bosiljka Tasic, Lydia Ng, Yongsoo Kim. bioRxiv 2023.11.24.568585; doi: https://doi.org/10.1101/2023.11.24.568585
+    - Josephine K. Liwang, Fae A. Kronman, Jennifer A. Minteer, Yuan-Ting Wu, Daniel J. Vanselow, Yoav Ben-Simon, Michael Taormina, Steffy B. Manjila, Deniz Parmaksiz, Sharon W. Way, Hongkui Zeng, Bosiljka Tasic, Lydia Ng, Yongsoo Kim. bioRxiv 2023.11.24.568585; doi: https://doi.org/10.1101/2023.11.24.568585
