@@ -42,8 +42,6 @@ Ideally, a high-performance computer with a 32- or 64-core processor to perform 
 
 ## How To Use
 
-**Available in this Github repository are the necessary MATLAB scripts designed for 3D cell counting in STPT-imaged whole mouse brains. However, to execute the main pipeline code ***RUN_THIS_FILE.m***, all downloaded scripts from this repository, installed software, and reference atlas files must be gathered in one parent directory. The code is written with a specific folder structure, which can be found by viewing/downloading the code package [here].**
-
 ### Pixel Classification for Cell Segmentation using ilastik
 > The Pixel Classification workflow categorizes pixels by utilizing both pixel features and user annotations. This workflow provides flexibility in choosing from a range of generic pixel features, including smoothed pixel intensity, edge filters, and texture descriptors. After selecting the desired features, a Random Forest classifier is trained interactively using user annotations.
 
@@ -65,26 +63,35 @@ In brief:
       - Label 2: brain tissue background
       - Label 3: signal of interest for segmentation
       - Label 4: (optional) signal #2, extraneous fibers, etc
-7. Click on the **Live Update** button to let the ML training of drawn labels update on the imaged TIFs.
+6. Click on the **Live Update** button to let the ML training of drawn labels update on the imaged TIFs.
      - Note: Unclick **Live Update** when navigating around image and drawing additional labels because the program can lag.
-8. Toggle between **Prediction** and **Segmentation** buttons to view how the trained ML is performing based on user input thus far.
+7. Toggle between **Prediction** and **Segmentation** buttons to view how the trained ML is performing based on user input thus far.
+8. **SAVE PROJECT** continually during ML training.
+   - Save this .ilp file on a local computer where the counting code will be executed or on a shared network drive.
+   - Remember file pathname for input into counting code.
 
 ### Cell Counting
+**Available in this Github repository are the necessary MATLAB scripts designed for 3D cell counting in STPT-imaged whole mouse brains. However, to execute the main pipeline code ***RUN_THIS_FILE.m***, all downloaded scripts from this repository, installed software, and reference atlas files must be gathered in one parent directory. The code is written with a specific folder structure, which can be found by viewing/downloading the code package [here].**
+
 > Note: This README provides a general overview of how to run the main MATLAB script **RUN_THIS_FILE.m** that calls on a collective of scripts in the **private** folder. It is crucial to refer to the comments (preceded by % and %%%) in the main script for detailed information on each section and parameter.
 
 1. Open **RUN_THIS_FILE.m** in MATLAB.
-
-
-2. 
-Background subtraction: Images in images_in_ch_folder are processed to create a signal minus noise output in subtracted_ch_folder.
-Normalization: Normalization is applied to images in images_in_ch_folder and saved in normalized_images_folder.
-Registration: Registration is performed using images in registering_ch_folder to match the reference brain background.
-Cell Counting: Various counting methods are applied based on the counting_switch value.
+2. Ensure all necessary files and applications are located in one parent directory for the code package. This folder should be saved on your local computer drive.
+3. Outline of steps:
+    - Background subtraction (optional): Images in "background_ch_folder" are subtracted from "images_in_ch_folder" to create a "Signal_minus_Noise" image output in "subtracted_ch_folder".
+    - Normalization (optional): Normalization of intensity is applied to images in "images_in_ch_folder" and saved in "normalized_images_folder".
+    - Registration: Registration is performed using images in "registering_ch_folder" to align with the "reference_brain_background".
+    - Cell counting: Various counting methods are applied based on the "counting_switch" value.
+    - Reverse registration: Back registration of anatomical labels "allen_anno"
+4. Under **Essential Settings**, fill out the necessary input for executing the counting code.
+    - Update the "targeting_folder" variable with the main cluster folder path containing stitched STPT images.
+    - Set the paths for "images_in_ch_folder", "registering_ch_folder", "background_ch_folder", and "subtracted_ch_folder".
+    - ***Each input setting is explained in greater detail within the commented code, so please refer to those comments for specific directions.***
+5. 
 Instructions
 Basic Settings:
 
-Update the targeting_folder variable with the main cluster folder path.
-Set the paths for images_in_ch_folder, registering_ch_folder, background_ch_folder, and subtracted_ch_folder.
+
 Functional Switches:
 
 Adjust the switches (background_subtraction_switch, normalization_switch, counting_switch, etc.) based on your requirements.
