@@ -27,7 +27,7 @@ Ideally, a high-performance computer with a 32- or 64-core processor to perform 
 - ilastik, for machine learning-based segmentation: [download](https://www.ilastik.org/documentation/basics/installation) or [ilastik github](https://github.com/ilastik/ilastik)
   - Tested using ilastik version 1.4.0
 - elastix and transformix: [download](https://elastix.lumc.nl/download.php) or [elastix github](https://github.com/SuperElastix/elastix)
--   Tested using elastix version 4.8
+  - Tested using elastix version 4.8
 - Python: [download](https://www.python.org/downloads/)
   - Tested using Python versions 3.8.3 and 3.9.7
  
@@ -99,7 +99,8 @@ In brief:
      - If running on a normal home desktop computer (average 8 cores), the runtime may last or exceed 24 to 48 hours.
 8. Output in sample directory:
     - Spreadsheet (counted_3d_cells.csv) with columns for brain regions (listed in hierarchical order based on CCFv3 ontology), cell counts, cell densities, and volumes per region for an individual brain sample.
-      -  This quantitative data output can be further analyzed using multiple software options (e.g. Prism (GraphPad), Excel (Microsoft), etc.) 
+      -  This quantitative data output can be analyzed using multiple software options (e.g. Prism (GraphPad), Excel (Microsoft), etc).
+      -  All quantitative results in the related [manuscript](
     - Registration output (elastix folder)
        - All processes and errors during registration are logged (elastix.log) and these files are generated automatically. 
     - Reverse registration output with mapped cells in 3D reference space (cell_counted_refspace.tif)
