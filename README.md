@@ -1,5 +1,5 @@
 # 3D Cell Quantification Pipeline for the Whole Mouse Brain 
-- Created by the Yongsoo Kim Lab [(website)](https://kimlab.io/) in 2021
+- Created by the [Yongsoo Kim Lab](https://kimlab.io/) in 2021
 - README updated on 20231218 by J. Liwang
 
 ## Overview
