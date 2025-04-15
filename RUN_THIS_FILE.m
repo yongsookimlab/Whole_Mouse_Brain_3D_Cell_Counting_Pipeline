@@ -11,7 +11,7 @@ close all
 
 %% Essential Settings - editing required
 
-%%% Input file pathname of main directory with stitched STPT imaged data (TIFs); this will also be the data output location.
+%%% Input file pathname of main directory with stitched STPT or LSFM imaged data (TIFs); this will also be the data output location.
 targeting_folder = 'Y:\Lab_members\Josephine\40c_transfer\CtxLayer_celltype_mapping_LydiaNg_Allen\L1_Slc32a1-Lamp5\663537_M_P10_Slc32a1-Lamp5-Ai65_BIL0539050842'; 
 
 %%% Input file pathname for ilastik ML project file (.ilp)
@@ -52,7 +52,7 @@ images_ML_folder = [targeting_folder, '/ml_result'];
 %%% The file location and pathname must be consistent with the folder structure in OneDrive. It should be saved within the parent directory of the code package.
 
 %%% Input the x, y, and z resolution (in micrometers) of the stitched image.
-xyz_resolution = [1.00 1.00 50]; % STPT [1.00 1.00 50]
+xyz_resolution = [1.00 1.00 50]; % STPT [1.00 1.00 50], LSFM [1.80 1.80 5]
 
 %%% Set the target resolution (in micrometers) for downsized TIFs. 
 targeting_resolution = 20;
@@ -60,6 +60,7 @@ targeting_resolution = 20;
 %%% Confirm the imaged brain's xyz orientation. 
 brain_xyz_orientation = [3 2 5]; 
 % Usually, our STPT images have [x+, y+, z+] orientation of [3 2 5] -> Example: Coronal brain with its ventral side on the left and dorsal surface facing the right. As Z-depth increases, the brain goes from posterior to anterior.
+% Our LSFM images typically have an orientation of [x+, y+, z+] = [6 3 1] -> Example: In horizontal brain images, the anterior (rostral) side faces upward and the posterior (caudal) side faces downward along the acquired Z-plane. The Z-depth progresses from the dorsal to the ventral side of the brain.
 
 %%% Notes about brain_xyz_orientation:
 %%% [x+, y+, z+] -> Each variable represents the "direction" of brain orientation 
@@ -107,7 +108,7 @@ pixel_rev_registrated_folder = [targeting_folder, '/pix_rev_registration'];
 
 background_subtraction_switch = 0;
 normalization_switch = 0; % if applying ML counting to newly subtracted images, edit "normalization_switch" under "Pipeline" and make all "normalized_images_folder = subtracted_ch_folder"
-counting_switch = 3;
+counting_switch = 3; % 2 for LSFM, 3 for STPT
 registration_switch = 1;
 csv_switch = 1;
 reverse_registration_switch = 1;
@@ -128,7 +129,7 @@ normalization_ratio = 2; % 2 for STPT. Do not change.
 %%% counting_switch
 %%% 0: Do not perform any counting.
 %%% 1: Perform 3D nucleus counting using FFT
-%%% 2: Perform 3D cell counting using ML -> This option avoids over counting in Z direction, but two touching cells in 2D/3D will be counted as one cell.
+%%% 2: Perform 3D cell counting using ML -> This option avoids over counting in Z direction, but two touching cells in 2D/3D will be counted as one cell. This is the switch used for LSFM cell counting.
 %%% 3: Perform 2D cell counting using ML + local maximum -> Use this as the go-to switch for STPT-based cell counting. This option avoids over counting in X and Y directions, but will count two cells as one if touching in Z direction. Since STPT z-sections are 50um, there is no issue and 1.4x factor is applied for 2D to 3D conversion.
 %%% 4: Perform pixel counting using ML
 
