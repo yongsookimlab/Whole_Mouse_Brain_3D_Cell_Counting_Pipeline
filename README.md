@@ -1,16 +1,19 @@
-# 3D Cell Quantification Pipeline for the Whole Mouse Brain 
+# 3D Cell and Pixel Quantification Pipeline for the Whole Mouse Brain 
 - Created by the [Yongsoo Kim Lab](https://kimlab.io/)
-- README written and updated on 20231219 by J. Liwang
+- README written and updated on 20250415 by J. Liwang and S. Manjila
 
 ## Overview
-This code package is designed for comprehensive 3D cell counting using whole mouse brain images. The pipeline includes:
+This code package is designed for comprehensive 3D cell counting and pixel counting using whole mouse brain images. The pipeline includes:
 1. Implementing a supervised machine learning-based approach (ilastik) for automated cell segmentation via pixel and/or object classification,
-2. Image registration of serial two-photon tomography (STPT) stitched data to an age-matched reference brain template,
+2. Image registration of serial two-photon tomography (STPT) or light sheet fluorescence microscopy (LSFM) stitched data to an age-matched reference brain template,
 3. Registration of assigned and segmented voxels/"cells" to the reference space based on the common coordinate framework (CCF) system, and
 4. Transformation of anatomical annotations (from the reference brain atlas) to the sample image registered to the reference space.
 
-- Previously implemented for cell type mapping in the early postnatally developing mouse brain: [download preprint](https://www.biorxiv.org/content/10.1101/2023.11.24.568585v1.full.pdf) / [doi](https://www.biorxiv.org/content/10.1101/2023.11.24.568585v1) 
-  - Here is a Neuroglancer-based [web visualizer](https://kimlab.io/brain-map/epDevAtlas/) for the generated data output from running this code package, allowing any user to freely explore and download the data.
+Previously implemented for:
+1. Cell type mapping in the early postnatal developing mouse brain: [download epDevAtlas preprint](https://www.biorxiv.org/content/10.1101/2023.11.24.568585v1.full.pdf) / [doi](https://www.biorxiv.org/content/10.1101/2023.11.24.568585v1)
+  - Neuroglancer web visualization of generated data and code output for [epDevAtlas Project](https://kimlab.io/brain-map/epDevAtlas/)
+2. Brain-wide connectivity mapping of the mouse dorsal endopiriform nucleus (EPd): [download EPd preprint](https://www.biorxiv.org/content/10.1101/2024.09.30.615899v1.full.pdf) / [doi](https://www.biorxiv.org/content/10.1101/2024.09.30.615899v1)
+  - Neuroglancer web visualization of generated data for [EPd Connectivity Project](https://kimlab.io/brain-map/epDevAtlas/)
 
 ## System Requirements
 > Please make sure the following requirements (ie. operating system, software, and tools) are downloaded and installed on your machine prior to code use.
@@ -32,15 +35,16 @@ Ideally, a high-performance computer with a 32- or 64-core processor to perform 
   - Tested using Python versions 3.8.3 and 3.9.7
  
 ### Data and Tools
-- Full-resolution, stitched, STPT imaging data acquired with TissueCyte (TissueVision)
+- Full-resolution, stitched, STPT imaging data acquired with TissueCyte (TissueVision) or LSFM imaging data acquired with SmartSPIM (LifeCanvas Technologies)
   - A dataset consisting of one STPT-imaged brain with expected data output has been made available for testing/demo purposes: [download here](https://pennstateoffice365-my.sharepoint.com/:f:/g/personal/yuk17_psu_edu/EkTTKApE7aFLs7xzEMAnKloBq24jZ_rrKDmVWUt4mql93A?e=4DCPtz) 
-  - Raw STPT images acquired elsewhere can be fed through our custom stitching code (available [here](https://github.com/yongsookimlab/TracibleTissueCyteStitching)) for file structure and metadata compatibility.
-  - Additionally, the Brain Image Library (BIL, RRID:SCR_017272) is a public [database](https://www.brainimagelibrary.org/index.html) of brain imaging data that has STPT datasets for download which can be used as input for the counting code.
+  - Raw STPT and LSFM images acquired elsewhere can be fed through our custom stitching code (available [here for STPT](https://github.com/yongsookimlab/TracibleTissueCyteStitching) and [here for LSFM](https://github.com/yongsookimlab/LSFM_Image_Stitcher)) for file structure and metadata compatibility.
+  - Additionally, the Brain Image Library (BIL, RRID:SCR_017272) is a public [database](https://www.brainimagelibrary.org/index.html) of brain imaging data that has STPT and LSFM datasets for download which can be used as input for the counting code.
   -  For reference on how to use the TissueCyte (e.g. microscope set up, brain sample preparation, and image stitching), please see our open-source published [protocol](https://star-protocols.cell.com/protocols/2373).
     
 - Mouse brain reference atlas consisting of averaged templates and anatomical labels
   - Early Postnatal Developmental Mouse Brain Atlas (epDevAtlas, RRID:SCR_024725) can be viewed [here](https://kimlab.io/brain-map/epDevAtlas/) and downloaded [here](https://pennstateoffice365-my.sharepoint.com/:f:/g/personal/yuk17_psu_edu/EkS4MIAfRgdKp93QHphJmfoBwOPt4fr2IFERVUMlcR3Rvg?e=tEUQVx).
   - Allen Mouse Brain Reference Atlas (Allen CCFv3, RRID:SCR_002978) can be viewed and downloaded [here](https://mouse.brain-map.org/static/atlas).
+  - A modified version of Allen CCFv3 with highlighted fiber tracts for registering LSFM monosynaptic rabies tracing data can be downloaded [here](https://pennstateoffice365-my.sharepoint.com/:u:/g/personal/yuk17_psu_edu/EQ9ppklRoFtClDAzD9fmuP8BDeNxVB1G8Eutxaof_7nqFg?e=stBbJ3).
 
 
 ## How To Use
@@ -64,7 +68,7 @@ In brief:
     - Examples of labels (minimum of three for counting code, with Label 3 segmenting your cells of interest):
       - Label 1: empty background
       - Label 2: brain tissue background
-      - Label 3: signal of interest for segmentation
+      - Label 3: signal of interest for segmentation (can be cells or projection fibers)
       - Label 4: (optional) signal #2, extraneous fibers, etc
 6. Click on the **Live Update** button to let the ML training of drawn labels update on the imaged TIFs.
      - Note: Unclick **Live Update** when navigating around image and drawing additional labels because the program can lag.
@@ -141,7 +145,7 @@ In brief:
 
 
 ## Limitations
-This code was developed for 3D cell quantification utilizing whole brain imaging with the TissueCyte (TissueVision) STPT system in mind, which has specific parameters that may not apply to other imaging modalities. It is possible to use this code with 3D whole brain images acquired via light sheet fluorescence microscopy, but this is currently under optimization by the Yongsoo Kim Lab.
+This code was developed for 3D cell quantification utilizing whole brain imaging with the TissueCyte (TissueVision) STPT system in mind, which has specific parameters that may not apply to other imaging modalities. This code is compatible with 3D whole-brain images acquired with LSFM and is currently being optimized by the Yongsoo Kim Lab to improve the LSFM imaging workflow.
 
 
 ## License
